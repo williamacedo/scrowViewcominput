@@ -1,0 +1,219 @@
+ <ScrollView>
+                <View style={styles.container}>
+                    <BackButton return={() => this.backProfile()}/>
+                    <View style={styles.content}>
+                        <View style={{marginBottom: 10}}>
+                            <Text style={styles.headerText}>Complete o seu perfil</Text>
+                            <Text style={styles.headerText}>para receber presentes!</Text>
+                        </View>
+
+                        <View style={styles.avatarArea}>
+                            <View>
+                                <Image source={require('../assets/imgProfile.png')} style={styles.avatarProfile}/>
+                                <View style={{position: 'absolute', top: -7, right: -7}}>
+                                    <CameraSvg/>
+                                </View>
+                            </View>
+                            <View style={{marginLeft: '10%', marginRight: '30%'}}>
+                                <TouchableOpacity onPress={() => {
+                                    this.props.navigation.navigate('DefinePerso')
+                                }}>
+                                    <View style={[{
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center'
+                                    }, styles.persoButton]}>
+                                        <Text style={{color: '#445ee9'}}>Definir personalidade</Text>
+                                        <View style={{marginLeft: 10}}>
+                                            <ButtonPerso/>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.bio}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={styles.titleBio}>Bio (140 caracteres)</Text>
+                                <Text style={styles.bodyBio}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
+                                    magnis dis parturient montes, nascetur ridiculus mus. </Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.textArea}>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Nome Completo</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.name}
+                                    onChangeText={this.props.changeName}
+                                    autoCapitalize="none"
+                                    blurOnSubmit={false}
+                                    getRef={input => {
+                                        this.firstNameRef = input;
+                                    }}
+                                    onSubmitEditing={() => {
+                                        this.emailInputRef._root.focus();
+                                    }}
+                                    returnKeyType={"next"}
+                                />
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>E-mail</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.email}
+                                    onChangeText={this.props.changeEmail}
+                                    autoCapitalize="none"
+                                    blurOnSubmit={false}
+                                    getRef={input => {
+                                        this.emailInputRef = input;
+                                    }}
+                                    onSubmitEditing={() => {
+                                        this.userInputRef._root.focus();
+                                    }}
+                                    returnKeyType={"next"}
+                                />
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Usuário</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.user}
+                                    onChangeText={this.props.changeUser}
+                                    autoCapitalize="none"
+                                    blurOnSubmit={false}
+                                    getRef={input => {
+                                        this.userInputRef = input;
+                                    }}
+                                    onSubmitEditing={() => {
+                                        this.passInputRef._root.focus();
+                                    }}
+                                    returnKeyType={"next"}
+                                />
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Senha</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.password}
+                                    onChangeText={this.props.changePass}
+                                    secureTextEntry={this.props.PassHide}
+                                    autoCapitalize="none"
+                                    getRef={input => {
+                                        this.passInputRef = input;
+                                    }}
+                                />
+                                <Icon
+                                    type="Feather"
+                                    name={this.props.PassHide == true ? "eye-off" : "eye"}
+                                    onPress={() => this.props.showPass(this.props.PassHide)}
+                                    style={{color: '#CCCCCC', fontSize: 15}}/>
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Celular</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.tel}
+                                    onChangeText={this.props.changeTel}
+                                    autoCapitalize="none"
+                                />
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Aniversário</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.aniversario}
+                                    onChangeText={this.props.changeAniver}
+                                    autoCapitalize="none"
+                                />
+                            </Item>
+                            <View style={{marginTop: 17, marginLeft: -5}}>
+                                <Label style={[styles.formLabel, {marginLeft: 8}]}>Gênero</Label>
+                                <Picker
+                                    itemStyle={{color: 'blue'}}
+                                    mode="dropdown"
+                                    iosIcon={<Icon name="ios-arrow-down-outline"/>}
+                                    selectedValue={this.props.genero}
+                                    onValueChange={this.changeGenero}
+                                >
+                                    <Picker.Item textStyle={{color: '#66bdca'}} label="Feminino"
+                                                 value={this.props.genero}/>
+                                    <Picker.Item label="Masculino" value={this.props.genero}/>
+                                </Picker>
+                            </View>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>CEP</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    autoCapitalize="none"
+                                    value={this.props.cep}
+                                    onChangeText={this.props.changeCep}
+                                />
+                            </Item>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Rua</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    autoCapitalize="none"
+                                    value={this.props.rua}
+                                    onChangeText={this.props.changeRua}
+                                />
+                            </Item>
+                            <View style={styles.colArea}>
+                                <View style={{width: '50%'}}>
+                                    <Label style={styles.formLabel}>Número</Label>
+                                    <Input
+                                        style={styles.formInput}
+                                        value={this.props.numero}
+                                        onChangeText={this.props.changeNumero}
+                                        autoCapitalize="none"
+                                    />
+                                </View>
+                                <View style={{width: '50%'}}>
+                                    <Label style={styles.formLabel}>Complemento</Label>
+                                    <Input
+                                        style={styles.formInput}
+                                        value={this.props.complemento}
+                                        onChangeText={this.props.changeComplemento}
+                                        autoCapitalize="none"
+                                    />
+                                </View>
+                            </View>
+                            <Item floatingLabel style={styles.formItem}>
+                                <Label style={styles.formLabel}>Bairro</Label>
+                                <Input
+                                    style={styles.formInput}
+                                    value={this.props.bairro}
+                                    onChangeText={this.props.changeBairro}
+                                    autoCapitalize="none"
+                                />
+                            </Item>
+                            <View style={styles.colArea}>
+                                <View style={{width: '70%'}}>
+                                    <Label style={styles.formLabel}>Cidade</Label>
+                                    <Input
+                                        style={styles.formInput}
+                                        value={this.props.cidade}
+                                        onChangeText={this.props.changeCidade}
+                                        autoCapitalize="none"
+                                    />
+                                </View>
+                                <View style={{width: '30%'}}>
+                                    <Label style={styles.formLabel}>UF</Label>
+                                    <Input
+                                        style={styles.formInput}
+                                        value={this.props.uf}
+                                        onChangeText={this.props.changeUf}
+                                        autoCapitalize="none"
+                                    />
+                                </View>
+                            </View>                                                    
+                            <TouchableOpacity onPress={() => {
+                            }} style={[styles.button, styles.buttonBg]}>
+                                <Text style={styles.buttonText}>Salvar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
